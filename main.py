@@ -252,7 +252,6 @@ async def hypixel_info(ctx, username):
     embed.add_field(name="Total beds broken", value=player_data['player']['achievements']['bedwars_beds'])
     embed.add_field(name="Total Bedwars Wins", value=player_data['player']['achievements']['bedwars_wins'])
     embed.add_field(name="Skywars Level", value=player_data['player']['achievements']['skywars_you_re_a_star'])
-    embed.add_field(name="Skywars kills", value=int(player_data['player']['achievements']['skywars_kills_team']) + int(player_data['player']['skywars_kils_solo']))
     embed.set_thumbnail(url="https://mc-heads.net/avatar" + uuid)
 if __name__ == "__main__":
     load_dotenv()
