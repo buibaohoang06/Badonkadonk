@@ -6,12 +6,12 @@ from urllib.error import HTTPError
 import discord
 import json
 import requests
+from soupsieve import match
 import random
 bot = commands.Bot(command_prefix="els ", help_command=None)
 
 @bot.event
 async def on_ready():
-    await bot.change_presence(activity=discord.Game(name="els help"))
     print("Ready!")
 @bot.command()
 async def ping(ctx):
@@ -226,6 +226,35 @@ async def rule34(ctx, tag):
 async def r34error(ctx, error):
     if isinstance(error, commands.MissingRequiredArgument):
         await ctx.channel.send("Missing required argument!")
+@bot.command()
+async def hypixel_info(ctx, username):
+    #get uuid
+    with urllib.request.urlopen(f'https://api.mojang.com/users/profiles/minecraft/{username}') as data:
+        uuid = json.loads(data.read().decode())['id']
+    #get data from hypixel api
+    with urllib.request.urlopen(f'https://api.hypixel.net/player?key=1eff5fd3-5ddc-4d6b-ad91-8533a558c63a&uuid={uuid}') as hypixel:
+        player_data = json.loads(hypixel.read().decode())
+    #process rank
+    if player_data['player']['newPackageRank'] == "VIP_PLUS":
+        rank = "VIP+"
+    elif player_data['player']['newPackageRank'] == "VIP":
+        rank = "VIP"
+    elif player_data['player']['newPackageRank'] == "MVP":
+        rank = "MVP"
+    elif player_data['player']['newPackageRank'] == "MVP_PLUS":
+        rank = "MVP+"
+    elif player_data['player']['newPackageRank'] == "MVP_PLUS" and player_data['player']['monthlyPackageRank'] == "SUPERSTAR":
+        rank = "MVP++"
+    embed = discord.Embed(title=username + "'s info", color=0xBB6464)
+    embed.add_field(name="Username", value=username)
+    embed.add_field(name="Rank", value=rank)
+    embed.add_field(name="Karma", value=player_data['player']['karma'])
+    embed.add_field(name="Bedwars Level", value=player_data['player']['achievements']['bedwars_level'])
+    embed.add_field(name="Total beds broken", value=player_data['player']['achievements']['bedwars_beds'])
+    embed.add_field(name="Total Bedwars Wins", value=player_data['player']['achievements']['bedwars_wins'])
+    embed.add_field(name="Skywars Level", value=player_data['player']['achievements']['skywars_you_re_a_star'])
+    embed.add_field(name="Skywars kills", value=int(player_data['player']['achievements']['skywars_kills_team']) + int(player_data['player']['skywars_kils_solo']))
+    embed.set_thumbnail(url="https://mc-heads.net/avatar" + uuid)
 if __name__ == "__main__":
     load_dotenv()
     bot.run(getenv("TOKEN"))
