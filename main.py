@@ -254,6 +254,7 @@ async def hypixel_info(ctx, username):
     embed.add_field(name="Total Bedwars Wins", value=player_data['player']['achievements']['bedwars_wins'])
     embed.add_field(name="Skywars Level", value=player_data['player']['achievements']['skywars_you_re_a_star'])
     embed.set_thumbnail(url="https://mc-heads.net/avatar" + uuid)
+    await ctx.channel.send(embed=embed)
 if __name__ == "__main__":
     load_dotenv()
     bot.run(getenv("TOKEN"))
