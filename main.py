@@ -229,7 +229,8 @@ async def r34error(ctx, error):
 async def hypixel_info(ctx, username):
     #get uuid
     with urllib.request.urlopen(f'https://api.mojang.com/users/profiles/minecraft/{username}') as data:
-        uuid = json.loads(data.read().decode())['id']
+        res = json.loads(data.read().decode())
+        uuid = res['id'] 
     #get data from hypixel api
     with urllib.request.urlopen(f'https://api.hypixel.net/player?key=1eff5fd3-5ddc-4d6b-ad91-8533a558c63a&uuid={uuid}') as hypixel:
         player_data = json.loads(hypixel.read().decode())
