@@ -228,7 +228,9 @@ async def r34error(ctx, error):
 @bot.command()
 async def hypixel_info(ctx, username):
     #get uuid
-    with urllib.request.urlopen(f'https://playerdb.co/api/player/minecraft/{username}') as data:
+    req = urllib.request.Request(f'https://playerdb.co/api/player/minecraft/{username}')
+    req.add_header('User-Agent', 'Mozilla/5.0')
+    with urllib.request.urlopen(req) as data:
         res = json.loads(data.read().decode())
         uuid = res['data']['player']['id'] 
     #get data from hypixel api
