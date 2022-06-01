@@ -228,9 +228,9 @@ async def r34error(ctx, error):
 @bot.command()
 async def hypixel_info(ctx, username):
     #get uuid
-    with urllib.request.urlopen(f'https://api.minetools.eu/uuid/{username}') as data:
+    with urllib.request.urlopen(f'https://playerdb.co/api/player/minecraft/{username}') as data:
         res = json.loads(data.read().decode())
-        uuid = res['id'] 
+        uuid = res['data']['player']['id'] 
     #get data from hypixel api
     with urllib.request.urlopen(f'https://api.hypixel.net/player?key=1eff5fd3-5ddc-4d6b-ad91-8533a558c63a&uuid={uuid}') as hypixel:
         player_data = json.loads(hypixel.read().decode())
@@ -253,7 +253,6 @@ async def hypixel_info(ctx, username):
     embed.add_field(name="Total beds broken", value=player_data['player']['achievements']['bedwars_beds'])
     embed.add_field(name="Total Bedwars Wins", value=player_data['player']['achievements']['bedwars_wins'])
     embed.add_field(name="Skywars Level", value=player_data['player']['achievements']['skywars_you_re_a_star'])
-    embed.set_thumbnail(url="https://mc-heads.net/avatar" + uuid)
     await ctx.channel.send(embed=embed)
 if __name__ == "__main__":
     load_dotenv()
