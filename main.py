@@ -228,7 +228,7 @@ async def r34error(ctx, error):
 @bot.command()
 async def hypixel_info(ctx, username):
     #get uuid
-    with urllib.request.urlopen(f'https://api.mojang.com/users/profiles/minecraft/{username}') as data:
+    with urllib.request.urlopen(f'https://api.minetools.eu/uuid/{username}') as data:
         res = json.loads(data.read().decode())
         uuid = res['id'] 
     #get data from hypixel api
