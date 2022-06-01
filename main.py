@@ -6,7 +6,6 @@ from urllib.error import HTTPError
 import discord
 import json
 import requests
-from soupsieve import match
 import random
 bot = commands.Bot(command_prefix="els ", help_command=None)
 
