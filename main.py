@@ -25,7 +25,7 @@ async def help(ctx):
     embed.add_field(name="dice", value="Roll a random number from 1 to 6.", inline=False)
     embed.add_field(name="howgay <ping a person>", value="Determine how gay is the pinged person.", inline=False)
     embed.add_field(name="howsimp <ping a person>", value="Determine how simp is the pinged person.", inline=False)
-    embed.add_field(name="getmeme <ping a person>", value="Get a random meme.")
+    embed.add_field(name="getmeme", value="Get a random meme.")
     embed.add_field(name="pp <ping a person>", value="pp size machine.")
     embed.add_field(name="insult <ping a person>", value="Insult someone.")
     embed.add_field(name="rule34 <tag>", value="Fetch an image from the Rule34 API.", inline=False)
