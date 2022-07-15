@@ -7,7 +7,7 @@ import discord
 import json
 import requests
 import random
-bot = commands.Bot(command_prefix="els ", help_command=None)
+bot = commands.Bot(command_prefix="donk ", help_command=None)
 
 @bot.event
 async def on_ready():
@@ -19,7 +19,7 @@ async def ping(ctx):
 @bot.command()
 async def help(ctx):
     embed = discord.Embed(title="Help List", color=0xBB6464)
-    embed.add_field(name="Prefix", value="els", inline=False)
+    embed.add_field(name="Prefix", value="donk", inline=False)
     embed.add_field(name="valorant_info <name> <tag>", value="Gather Valorant information of the aforementioned person.", inline=False)
     embed.add_field(name="match_history <name> <tag> <region (ap/br/eu/kr/latam/na)> <amount>", value="Gather match history (5 max).", inline=False)
     embed.add_field(name="dice", value="Roll a random number from 1 to 6.", inline=False)
@@ -31,8 +31,7 @@ async def help(ctx):
     embed.add_field(name="rule34 <tag>", value="Fetch an image from the Rule34 API.", inline=False)
     await ctx.channel.send(embed=embed)
     await ctx.channel.send("All APIs and images belong to their rightful owner.")
-    await ctx.channel.send("Made with :heart: by Harvey Bui.")
-#valorant info
+    #valorant info
 @bot.command()
 async def valorant_info(ctx, name : str, tag : str):
     try:
@@ -153,7 +152,7 @@ async def dice(ctx):
 @bot.command()
 async def howgay(ctx, *,  avamember : discord.Member=None):
     amount = random.randint(0, 100)
-    embed = discord.Embed(title="Thiels Bot Gay-inator", color=0xBB6464)
+    embed = discord.Embed(title="Badonkadonk Gay-inator", color=0xBB6464)
     embed.add_field(name="Gay Amount", value=str(avamember) + "is " + str(amount) + "% gay :rainbow_flag:")
     embed.set_thumbnail(url=avamember.avatar_url)
     await ctx.channel.send(embed=embed)
@@ -164,7 +163,7 @@ async def howgay_error(ctx, error):
 @bot.command()
 async def howsimp(ctx, *, member : discord.Member=None):
     amount = random.randint(0, 100)
-    embed = discord.Embed(title="Thiels Bot Simp-inator", color=0xBB6464)
+    embed = discord.Embed(title="Badonkadonk Bot Simp-inator", color=0xBB6464)
     embed.add_field(name="Simp Amount", value=str(member) + " is " + str(amount) + "% simp :female_sign:")
     embed.set_thumbnail(url=member.avatar_url)
     await ctx.channel.send(embed=embed)
@@ -193,7 +192,7 @@ async def insult_error(ctx, error):
 		await ctx.channel.send("You haven't mentioned who you wanted to roast. Mention that person and try again!")
 @bot.command()
 async def pp(ctx, name : discord.Member = None):
-    embed = discord.Embed(title="Thiels Bot PP-Inator", color=0xBB6464)
+    embed = discord.Embed(title="Badonkadonk PP-Inator", color=0xBB6464)
     embed.add_field(name="PP Size", value=str("8" + "=" * random.randint(1, 30) + "D"))
     embed.set_thumbnail(url=name.avatar_url)
     await ctx.channel.send(embed=embed)
