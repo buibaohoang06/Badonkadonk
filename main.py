@@ -21,7 +21,7 @@ async def help(ctx):
     embed = discord.Embed(title="Help List", color=0xBB6464)
     embed.add_field(name="Prefix", value="donk", inline=False)
     embed.add_field(name="valorant_info <name> <tag>", value="Gather Valorant information of the aforementioned person.", inline=False)
-    embed.add_field(name="match_history <name> <tag> <region (ap/br/eu/kr/latam/na)> <amount>", value="Gather match history (5 max).", inline=False)
+    embed.add_field(name="match_history <name>  <tag> <region (ap/br/eu/kr/latam/na)> <amount>", value="Gather match history (5 max).", inline=False)
     embed.add_field(name="dice", value="Roll a random number from 1 to 6.", inline=False)
     embed.add_field(name="howgay <ping a person>", value="Determine how gay is the pinged person.", inline=False)
     embed.add_field(name="howsimp <ping a person>", value="Determine how simp is the pinged person.", inline=False)
@@ -34,6 +34,7 @@ async def help(ctx):
     #valorant info
 @bot.command()
 async def valorant_info(ctx, name : str, tag : str):
+    await ctx.channel.send("Gathering info. This could take a minute.")
     try:
         url = f'https://api.henrikdev.xyz/valorant/v1/account/{name}/{tag}'
         #set header 
@@ -62,8 +63,8 @@ async def valorant_info(ctx, name : str, tag : str):
         embed.add_field(name="ELO", value=elo)
         embed.set_thumbnail(url=banner)
         await ctx.channel.send(embed=embed)
-    except HTTPError:
-        await ctx.channel.send("Error occured, try again later.")
+    except Exception as e:
+        await ctx.channel.send(f"Error raised: {str(e)}.")
 @valorant_info.error
 async def valinfoerror(ctx, error):
     if isinstance(error, commands.MissingRequiredArgument):
@@ -201,7 +202,7 @@ async def pperror(ctx, error):
     if isinstance(error, commands.MissingRequiredArgument):
         await ctx.channel.send("You need to mention someone.")
 @bot.command()
-async def rule34(ctx, tag):
+async def rule34(ctx, *, tag):
     message = tag.replace(" ", "%20")
     if message == "random":
         url = "https://api.rule34.xxx/index.php?page=dapi&s=post&q=index&json=1&tags=*"
