@@ -11,6 +11,7 @@ bot = commands.Bot(command_prefix="donk ", help_command=None)
 
 @bot.event
 async def on_ready():
+    await bot.change_presence(activity=discord.Game(name="donk help"))
     print("Ready!")
 @bot.command()
 async def ping(ctx):
