@@ -212,7 +212,7 @@ async def rule34(ctx, *, tag):
             data_return = data[random.randint(0, len(data))]['sample_url']
         await ctx.channel.send(data_return)
     else:
-        url = "https://api.rule34.xxx/index.php?page=dapi&s=post&q=index&json=1&tags=" + message
+        url = "https://api.rule34.xxx/index.php?page=dapi&s=post&q=index&json=1&tags=" + message + "%20-animal_*%20-animals%20-furry_*%20-furry"
         try:
             with urllib.request.urlopen(url) as r34:
                 data = json.loads(r34.read().decode())
